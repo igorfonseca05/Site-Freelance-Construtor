@@ -1,19 +1,25 @@
 
 const PopUp = document.querySelector('#popup')
 
-const slideInLine = () => {
-    const slideContainer = document.querySelector('.rowSlide')
-    const slide = document.querySelector('[data-js="slideContainer"]')
 
-    slideContainer.addEventListener('click', (e) => {
-        if(e.target.tagName === 'BUTTON' || e.target.tagName == 'I' ) {
-            
-            const direction = e.target.dataset.js === 'next'? 1 : -1
+const isOnScreen = (el) => {
+    let rect = el.getBoundingClientRect()
+    return rect.top > 0 && rect.bottom < window.innerHeight
+}
 
-            slide.scrollBy({left: (slide.clientWidth * direction) - 180, behavior: 'smooth'})
-       }
-    })
+const playAnimation = (el) => {
 
+    if(isOnScreen(el)) el.style.animationPlayState = 'running'
+
+}
+
+const addAnimation = () => {
+    const costumers =  document.querySelectorAll('.costumersText')
+    const about =  document.querySelector('.About')
+    const costumersBg =  document.querySelector('.clientesBg')
+
+    playAnimation(about)
+    costumers.forEach(playAnimation)
 }
 
 const creatImgContainer =  (amountImgs) => {
@@ -40,7 +46,6 @@ const creatImgContainer =  (amountImgs) => {
     innerCarousel.insertAdjacentElement('afterbegin', div)
 
     count >= imagens.length-1? count = 0 : count++
-     
    })
 }
 
@@ -48,8 +53,6 @@ const getImagesFromArray = (num) => {
     const imgs = imagens[num-1]  
     creatImgContainer(imgs)
 }
-
-let imgContainer;
 
 const getClickedCard = () => {
     const rowSlideContainer = document.querySelector('.rowSlide')
@@ -64,7 +67,6 @@ const getClickedCard = () => {
           getImagesFromArray(cardNumber)
           PopUp.classList.toggle('hide')
        }
-
     })
 }
 
@@ -85,7 +87,23 @@ const slidePopUp = () => {
     })
 }
 
+const slideInLine = () => {
+    const slideContainer = document.querySelector('.rowSlide')
+    const slide = document.querySelector('[data-js="slideContainer"]')
+
+    slideContainer.addEventListener('click', (e) => {
+        if(e.target.tagName === 'BUTTON' || e.target.tagName == 'I' ) {
+            
+            const direction = e.target.dataset.js === 'next'? 1 : -1
+
+            slide.scrollBy({left: (slide.clientWidth * direction) - 180, behavior: 'smooth'})
+       }
+    })
+}
+
+window.addEventListener('scroll', addAnimation)
 
 slideInLine()
 slidePopUp()
 getClickedCard()
+// addAnimation()
