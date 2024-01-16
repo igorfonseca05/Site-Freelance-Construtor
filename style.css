@@ -358,6 +358,11 @@ a {
 
 
 @media screen and (max-width : 768px) {
+
+    .logo {
+        padding-left:  10px !important;
+    }
+
     .textsContainer {
         padding-left: 15px !important;
     }
@@ -389,7 +394,7 @@ a {
     .About{
         margin: 0 auto;
         text-align: center;
-        font-size: 16px !important;
+        font-size: 18px !important;
         padding-top: 15px;
         width: 80% !important;
 
@@ -421,6 +426,7 @@ a {
     #clientes .col-md-9{
         padding-top: 5px;
         width: 90% !important;
+        margin: 0 auto;
     }
 
     #clientes img{
